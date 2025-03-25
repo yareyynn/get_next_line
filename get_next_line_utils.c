@@ -1,20 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ysakarya <ysakarya@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/24 22:53:20 by ysakarya          #+#    #+#             */
+/*   Updated: 2025/03/25 04:28:21 by ysakarya         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
-
-char	*ft_substr(char const *s, int start, int len)
-{
-	char	*str;
-
-	if (start >= ft_strlen(s))
-		return (ft_strdup("\0"));
-	if (len > ft_strlen(s + start))
-		len = ft_strlen(s + start);
-	str = (char *)malloc(len + 1);
-	if (!str)
-		return (NULL);
-	ft_memcpy(str, s + start, len);
-	str[len] = '\0';
-	return (str);
-}
 
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
@@ -28,22 +24,11 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	return (tmp);
 }
 
-char	*ft_strdup(const char *s1)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*str;
-
-	str = malloc(ft_strlen(s1) +1);
-	if (!str)
-		return (0);
-	ft_strlcpy(str, s1, ft_strlen(s1) + 1);
-	return (str);
-}
-
-char	*ft_strjoin(char const *s1, char const *s2)
-{
-	char	*str;
-	size_t	len1;
-	size_t	len2;
+	int		len1;
+	int		len2;
 
 	len1 = ft_strlen(s1);
 	len2 = ft_strlen(s2);
@@ -53,6 +38,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	ft_memcpy(str, s1, len1);
 	ft_memcpy(str + len1, s2, len2);
 	str[len1 + len2] = '\0';
+	free (s1);
 	return (str);
 }
 
@@ -65,4 +51,16 @@ char	*ft_strchr(const char *s, int c)
 	if (*s == (char) c)
 		return ((char *)s);
 	return (0);
+}
+
+int	ft_strlen(const char *s)
+{
+	int	i;
+
+	i = 0;
+	if (!s)
+		return (0);
+	while (*s++)
+		i++;
+	return (i);
 }
